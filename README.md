@@ -225,80 +225,90 @@ Comparing **C1-B-1** and **C1-B-2** validates Claim **C1-B**, which evaluates th
 
 Claim **C2** evaluates whether GeoDPZO can achieve a better trade-off between model utility and zeroth-order query cost.
 
-We compare GeoDPZO using relatively small numbers of perturbation directions against DP-AggZO using larger values of $K$.
+
+We perform the comparison between GeoDPZO results on SST-5 `K=32` and DP-AggZO on SST-5 `K=64/256`, and compare the GeoDPZO-LC results on MNLI with `K=64` to DP-AggZO with $K=64/256$ under privacy budget `epsilon=6`.
 
 
-### C2-1: GeoDPZO-SC with $K=32$
+### C2-1-A: GeoDPZO-SC on SST-5 with $K=32$
 
-Run GeoDPZO-SC on SST-5 with `K=32`:
+Run GeoDPZO-SC by setting `ZO_METHOD=sc`:
 
 ```bash
-CUDA_VISIBLE_DEVICES=2 DPZERO_PRIVACY_EPS=6 \
+CUDA_VISIBLE_DEVICES=0 DPZERO_PRIVACY_EPS=6 \
 DP_SAMPLE_RATE=0.0625 STEP=1000 \
 SEED=42 NUM_DIRECTION=32 \
 RANDOM_DIRECTION_SEED=100 \
-BASE_LRS="2e-4" \
-DPZERO_THRESHOLD=5 TASK="sst-5" \
-ZO_METHOD=sc \
+BASE_LRS="0.00050" ZO_METHOD=sc \
+DPZERO_THRESHOLD=25 TASK="sst-5" \
 bash examples/dpaggzo.sh
 ```
 
 
-### C2-2: GeoDPZO-LC with $K=64$
+### C2-1-B: GeoDPZO-LC on MNLI with $K=64$
 
-Run GeoDPZO-LC with `K=64`:
+Reproduct GeoDPZO-LC by setting `ZO_METHOD=lc`:
 
 ```bash
-CUDA_VISIBLE_DEVICES=2 DPZERO_PRIVACY_EPS=6 \
+CUDA_VISIBLE_DEVICES=0 DPZERO_PRIVACY_EPS=6 \
 DP_SAMPLE_RATE=0.0625 STEP=1000 \
 SEED=42 NUM_DIRECTION=64 \
 RANDOM_DIRECTION_SEED=100 \
-BASE_LRS="2e-4" \
-DPZERO_THRESHOLD=5 TASK="sst-5" \
-ZO_METHOD=lc \
+BASE_LRS="0.00050" ZO_METHOD=lc \
+DPZERO_THRESHOLD=5 TASK="MNLI" \
 bash examples/dpaggzo.sh
 ```
 
 
-### C2-3: DP-AggZO with $K=64$
+### C2-2-A: DP-AggZO with $K=64$
 
 For comparison, run DP-AggZO with `K=64`:
 
 ```bash
-CUDA_VISIBLE_DEVICES=2 DPZERO_PRIVACY_EPS=6 \
+CUDA_VISIBLE_DEVICES=0 DPZERO_PRIVACY_EPS=6 \
 DP_SAMPLE_RATE=0.0625 STEP=1000 \
 SEED=42 NUM_DIRECTION=64 \
 RANDOM_DIRECTION_SEED=100 \
-BASE_LRS="2e-4" \
-DPZERO_THRESHOLD=5 TASK="sst-5" \
-ZO_METHOD=dpzo \
+BASE_LRS="0.00050" ZO_METHOD=dpzo \
+DPZERO_THRESHOLD=15 TASK="MNLI" \
 bash examples/dpaggzo.sh
 ```
 
+and reuse the result of GeoDPZO-LC on SST-5 with $K-64$ in the experiments C1-B.
 
-### C2-4: DP-AggZO with $K=256$
+### C2-2-B: DP-AggZO with $K=256$
 
 To evaluate DP-AggZO with substantially more zeroth-order queries, increase `NUM_DIRECTION` to 256:
 
 ```bash
-CUDA_VISIBLE_DEVICES=2 DPZERO_PRIVACY_EPS=6 \
+CUDA_VISIBLE_DEVICES=0 DPZERO_PRIVACY_EPS=6 \
 DP_SAMPLE_RATE=0.0625 STEP=1000 \
 SEED=42 NUM_DIRECTION=256 \
 RANDOM_DIRECTION_SEED=100 \
-BASE_LRS="2e-4" \
+BASE_LRS="0.00050" ZO_METHOD=dpzo \
+DPZERO_THRESHOLD=1 TASK="MNLI" \
+bash examples/dpaggzo.sh
+```
+
+and 
+
+```bash
+CUDA_VISIBLE_DEVICES=0 DPZERO_PRIVACY_EPS=6 \
+DP_SAMPLE_RATE=0.0625 STEP=1000 \
+SEED=42 NUM_DIRECTION=256 \
+RANDOM_DIRECTION_SEED=100 \
+BASE_LRS="0.00050" ZO_METHOD=dpzo \
 DPZERO_THRESHOLD=5 TASK="sst-5" \
-ZO_METHOD=dpzo \
 bash examples/dpaggzo.sh
 ```
 
 The comparison can therefore be summarized as:
 
-| Method | `ZO_METHOD` | $K$ |
+| Method | `ZO_METHOD` | $K$ | Dataset |
 |---|---|---:|
-| GeoDPZO-SC | `sc` | 32 |
-| GeoDPZO-LC | `lc` | 64 |
-| DP-AggZO | `dpzo` | 64 |
-| DP-AggZO | `dpzo` | 256 |
+| GeoDPZO-SC | `sc` | 32 | SST-5 |
+| GeoDPZO-LC | `lc` | 64 | MNLI |
+| DP-AggZO | `dpzo` | 64 | SST-5 \& MNLI |
+| DP-AggZO | `dpzo` | 256 | SST-5 \& MNLI |
 
 Comparing these configurations validates Claim **C2**, which examines whether GeoDPZO can achieve improved utility with fewer zeroth-order perturbation directions and therefore a better utility-efficiency trade-off.
 
