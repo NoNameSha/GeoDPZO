@@ -64,7 +64,7 @@ def stratified_sample(df, label_col, target_n):
 
 
 def process_dataset(dataset_name):
-    dataset_path = os.path.join(ROOT, dataset_name, "512-42")
+    dataset_path = os.path.join(ROOT, dataset_name, "512-42") ### different seed
 
     if not os.path.isdir(dataset_path):
         print(f"Skip {dataset_name}")
