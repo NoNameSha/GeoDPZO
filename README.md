@@ -304,12 +304,12 @@ bash examples/dpaggzo.sh
 
 The comparison can therefore be summarized as:
 
-| Method | `ZO_METHOD` | $K$ | Dataset |
-|---|---|---:|
+| Method | `ZO_METHOD` | K | Dataset |
+|---|---|---:|---|
 | GeoDPZO-SC | `sc` | 32 | SST-5 |
 | GeoDPZO-LC | `lc` | 64 | MNLI |
-| DP-AggZO | `dpzo` | 64 | SST-5 \& MNLI |
-| DP-AggZO | `dpzo` | 256 | SST-5 \& MNLI |
+| DP-AggZO | `dpzo` | 64 | SST-5 & MNLI |
+| DP-AggZO | `dpzo` | 256 | SST-5 & MNLI |
 
 Comparing these configurations validates Claim **C2**, which examines whether GeoDPZO can achieve improved utility with fewer zeroth-order perturbation directions and therefore a better utility-efficiency trade-off.
 
