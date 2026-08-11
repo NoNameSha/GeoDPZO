@@ -82,13 +82,12 @@ In our implementation, the zeroth-order optimization method is specified by `ZO_
 To run GeoDPZO-SC on SST-2, use:
 
 ```bash
-CUDA_VISIBLE_DEVICES=2 DPZERO_PRIVACY_EPS=6 \
+CUDA_VISIBLE_DEVICES=0 DPZERO_PRIVACY_EPS=6 \
 DP_SAMPLE_RATE=0.0625 STEP=1000 \
 SEED=42 NUM_DIRECTION=16 \
 RANDOM_DIRECTION_SEED=100 \
-BASE_LRS="75e-5" \
+BASE_LRS="75e-5" ZO_METHOD=sc \
 DPZERO_THRESHOLD=5 TASK="SST-2" \
-ZO_METHOD=sc \
 bash examples/dpaggzo.sh
 ```
 
@@ -118,13 +117,12 @@ We compare GeoDPZO-SC against DP-AggZO and DPZero on SST-2 with privacy budget `
 Run GeoDPZO-SC by setting `ZO_METHOD=sc`:
 
 ```bash
-CUDA_VISIBLE_DEVICES=2 DPZERO_PRIVACY_EPS=6 \
+CUDA_VISIBLE_DEVICES=0 DPZERO_PRIVACY_EPS=6 \
 DP_SAMPLE_RATE=0.0625 STEP=1000 \
 SEED=42 NUM_DIRECTION=16 \
 RANDOM_DIRECTION_SEED=100 \
-BASE_LRS="75e-5" \
+BASE_LRS="0.00075" ZO_METHOD=sc \
 DPZERO_THRESHOLD=5 TASK="SST-2" \
-ZO_METHOD=sc \
 bash examples/dpaggzo.sh
 ```
 
@@ -134,13 +132,12 @@ bash examples/dpaggzo.sh
 To evaluate DP-AggZO under the same privacy budget and with the same number of zeroth-order directions, set `ZO_METHOD=dpzo` while keeping `NUM_DIRECTION=16`:
 
 ```bash
-CUDA_VISIBLE_DEVICES=2 DPZERO_PRIVACY_EPS=6 \
+CUDA_VISIBLE_DEVICES=0 DPZERO_PRIVACY_EPS=6 \
 DP_SAMPLE_RATE=0.0625 STEP=1000 \
 SEED=42 NUM_DIRECTION=16 \
 RANDOM_DIRECTION_SEED=100 \
-BASE_LRS="75e-5" \
+BASE_LRS="0.00075" ZO_METHOD=dpzo \
 DPZERO_THRESHOLD=5 TASK="SST-2" \
-ZO_METHOD=dpzo \
 bash examples/dpaggzo.sh
 ```
 
@@ -169,13 +166,12 @@ ZO_METHOD=dpzo
 DPZero corresponds to the single-direction case. It can therefore be reproduced by setting `ZO_METHOD=dpzo` and `NUM_DIRECTION=1`:
 
 ```bash
-CUDA_VISIBLE_DEVICES=2 DPZERO_PRIVACY_EPS=6 \
-DP_SAMPLE_RATE=0.0625 STEP=1000 \
+CUDA_VISIBLE_DEVICES=0 STEP=1000 \
+DP_SAMPLE_RATE=0.0625 DPZERO_PRIVACY_EPS=6 \
 SEED=42 NUM_DIRECTION=1 \
 RANDOM_DIRECTION_SEED=100 \
-BASE_LRS="75e-5" \
-DPZERO_THRESHOLD=5 TASK="SST-2" \
-ZO_METHOD=dpzo \
+BASE_LRS="0.00075" ZO_METHOD=dpzo \
+DPZERO_THRESHOLD=50 TASK="SST-2" \
 bash examples/dpaggzo.sh
 ```
 
