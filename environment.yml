@@ -1,4 +1,4 @@
-name: dpzo
+name: geodpzo
 channels:
   - defaults
   - conda-forge
