@@ -106,14 +106,14 @@ The following experiments are provided to reproduce the main empirical claims of
 For artifact validation, we focus on RoBERTa-large, as experiments with larger OPT models require substantially more computation.
 
 
-## C1-A: GeoDPZO-SC in the Small-\(K\) Regime
+## C1-A: GeoDPZO-SC in the Small-$K$ Regime
 
-Claim **C1-A** evaluates whether **GeoDPZO-SC can achieve better utility than existing DPZO baselines in the small-\(K\) regime under the same privacy constraint**.
+Claim **C1-A** evaluates whether **GeoDPZO-SC can achieve better utility than existing DPZO baselines in the small-$K$ regime under the same privacy constraint**.
 
 We compare GeoDPZO-SC against DP-AggZO and DPZero on SST-2 with privacy budget `epsilon=6`.
 
 
-### C1-A-1: GeoDPZO-SC with \(K=16\)
+### C1-A-1: GeoDPZO-SC with $K=16$
 
 Run GeoDPZO-SC by setting `ZO_METHOD=sc`:
 
@@ -129,7 +129,7 @@ bash examples/dpaggzo.sh
 ```
 
 
-### C1-A-2: DP-AggZO with \(K=16\)
+### C1-A-2: DP-AggZO with $K=16$
 
 To evaluate DP-AggZO under the same privacy budget and with the same number of zeroth-order directions, set `ZO_METHOD=dpzo` while keeping `NUM_DIRECTION=16`:
 
@@ -164,9 +164,9 @@ ZO_METHOD=dpzo
 ```
 
 
-### C1-A-3: DPZero with \(K=1\)
+### C1-A-3: DPZero with $K=1$
 
-DPZero, or vanilla DPZO, corresponds to the single-direction case. It can therefore be reproduced by setting `ZO_METHOD=dpzo` and `NUM_DIRECTION=1`:
+DPZero corresponds to the single-direction case. It can therefore be reproduced by setting `ZO_METHOD=dpzo` and `NUM_DIRECTION=1`:
 
 ```bash
 CUDA_VISIBLE_DEVICES=2 DPZERO_PRIVACY_EPS=6 \
@@ -184,14 +184,14 @@ Comparing **C1-A-1**, **C1-A-2**, and **C1-A-3** validates Claim **C1-A**, which
 
 ---
 
-## C1-B: GeoDPZO-LC in the Large-\(K\) Regime
+## C1-B: GeoDPZO-LC in the Large-$K$ Regime
 
-Claim **C1-B** evaluates whether **GeoDPZO-LC can achieve better utility than DP-AggZO in the large-\(K\) regime under the same privacy constraint**.
+Claim **C1-B** evaluates whether **GeoDPZO-LC can achieve better utility than DP-AggZO in the large-$K$ regime under the same privacy constraint**.
 
 We perform the comparison on SST-5 with privacy budget `epsilon=6` and `K=64`.
 
 
-### C1-B-1: GeoDPZO-LC with \(K=64\)
+### C1-B-1: GeoDPZO-LC with $K=64$
 
 Run GeoDPZO-LC by setting `ZO_METHOD=lc`:
 
@@ -207,7 +207,7 @@ bash examples/dpaggzo.sh
 ```
 
 
-### C1-B-2: DP-AggZO with \(K=64\)
+### C1-B-2: DP-AggZO with $K=64$
 
 For comparison, run DP-AggZO with the same privacy budget, number of zeroth-order directions, and optimization configuration:
 
@@ -238,10 +238,10 @@ Comparing **C1-B-1** and **C1-B-2** validates Claim **C1-B**, which evaluates th
 
 Claim **C2** evaluates whether GeoDPZO can achieve a better trade-off between model utility and zeroth-order query cost.
 
-We compare GeoDPZO using relatively small numbers of perturbation directions against DP-AggZO using larger values of \(K\).
+We compare GeoDPZO using relatively small numbers of perturbation directions against DP-AggZO using larger values of $K$.
 
 
-### C2-1: GeoDPZO-SC with \(K=32\)
+### C2-1: GeoDPZO-SC with $K=32$
 
 Run GeoDPZO-SC on SST-5 with `K=32`:
 
@@ -257,7 +257,7 @@ bash examples/dpaggzo.sh
 ```
 
 
-### C2-2: GeoDPZO-LC with \(K=64\)
+### C2-2: GeoDPZO-LC with $K=64$
 
 Run GeoDPZO-LC with `K=64`:
 
@@ -273,7 +273,7 @@ bash examples/dpaggzo.sh
 ```
 
 
-### C2-3: DP-AggZO with \(K=64\)
+### C2-3: DP-AggZO with $K=64$
 
 For comparison, run DP-AggZO with `K=64`:
 
@@ -289,7 +289,7 @@ bash examples/dpaggzo.sh
 ```
 
 
-### C2-4: DP-AggZO with \(K=256\)
+### C2-4: DP-AggZO with $K=256$
 
 To evaluate DP-AggZO with substantially more zeroth-order queries, increase `NUM_DIRECTION` to 256:
 
@@ -306,7 +306,7 @@ bash examples/dpaggzo.sh
 
 The comparison can therefore be summarized as:
 
-| Method | `ZO_METHOD` | \(K\) |
+| Method | `ZO_METHOD` | $K$ |
 |---|---|---:|
 | GeoDPZO-SC | `sc` | 32 |
 | GeoDPZO-LC | `lc` | 64 |
@@ -319,14 +319,5 @@ Comparing these configurations validates Claim **C2**, which examines whether Ge
 ## Additional Notes
 
 The zeroth-order optimization method is controlled by `ZO_METHOD`, while `NUM_DIRECTION` determines the number of random perturbation directions used by the optimizer.
-
-In particular:
-
-```text
-ZO_METHOD=sc,   NUM_DIRECTION=K>1  -> GeoDPZO-SC
-ZO_METHOD=lc,   NUM_DIRECTION=K>1  -> GeoDPZO-LC
-ZO_METHOD=dpzo, NUM_DIRECTION=1    -> DPZero / vanilla DPZO
-ZO_METHOD=dpzo, NUM_DIRECTION=K>1  -> DP-AggZO
-```
 
 Other experimental settings, including the privacy budget, sampling rate, number of optimization steps, learning rate, clipping threshold, and random seeds, can be controlled through the corresponding environment variables in the commands above.
