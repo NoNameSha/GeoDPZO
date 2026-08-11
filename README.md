@@ -63,7 +63,8 @@ Please place the downloaded dataset archive in the `data/` directory, and then r
 
 ```bash
 cd data
-bash prepare_datasets.sh && python sample_datasets.py
+bash prepare_datasets.sh
+python sample_datasets.py
 cd ..
 ```
 
