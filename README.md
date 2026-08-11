@@ -148,10 +148,9 @@ Here, `ZO_METHOD=dpzo` with `NUM_DIRECTION=16` corresponds to the multi-directio
 
 The automatic clipping variant can also be evaluated under the DP-AggZO setting.
 
-To enable automatic clipping, navigate to the `src` directory and uncomment line 880 in:
-
+To enable automatic clipping, navigate to the `src` directory and uncomment lines 875-877 in:
 ```text
-dptrainer_aggzo_est.py
+dptrainer_aggzo.py
 ```
 
 Then run the corresponding DP-AggZO configuration with:
@@ -192,13 +191,12 @@ We perform the comparison on SST-5 with privacy budget `epsilon=6` and `K=64`.
 Run GeoDPZO-LC by setting `ZO_METHOD=lc`:
 
 ```bash
-CUDA_VISIBLE_DEVICES=2 DPZERO_PRIVACY_EPS=6 \
+CUDA_VISIBLE_DEVICES=0 DPZERO_PRIVACY_EPS=6 \
 DP_SAMPLE_RATE=0.0625 STEP=1000 \
 SEED=42 NUM_DIRECTION=64 \
 RANDOM_DIRECTION_SEED=100 \
-BASE_LRS="8e-5" \
-DPZERO_THRESHOLD=5 TASK="sst-5" \
-ZO_METHOD=lc \
+BASE_LRS="0.00050" ZO_METHOD=lc \
+DPZERO_THRESHOLD=15 TASK="sst-5" \
 bash examples/dpaggzo.sh
 ```
 
@@ -208,22 +206,15 @@ bash examples/dpaggzo.sh
 For comparison, run DP-AggZO with the same privacy budget, number of zeroth-order directions, and optimization configuration:
 
 ```bash
-CUDA_VISIBLE_DEVICES=2 DPZERO_PRIVACY_EPS=6 \
+CUDA_VISIBLE_DEVICES=0 DPZERO_PRIVACY_EPS=6 \
 DP_SAMPLE_RATE=0.0625 STEP=1000 \
 SEED=42 NUM_DIRECTION=64 \
 RANDOM_DIRECTION_SEED=100 \
-BASE_LRS="8e-5" \
-DPZERO_THRESHOLD=5 TASK="sst-5" \
-ZO_METHOD=dpzo \
+BASE_LRS="0.00050" ZO_METHOD=dpzo \
+DPZERO_THRESHOLD=15 TASK="sst-5" \
 bash examples/dpaggzo.sh
 ```
 
-The only method-level difference between the two experiments is therefore:
-
-```text
-ZO_METHOD=lc      # GeoDPZO-LC
-ZO_METHOD=dpzo    # DP-AggZO
-```
 
 Comparing **C1-B-1** and **C1-B-2** validates Claim **C1-B**, which evaluates the utility advantage of GeoDPZO-LC over DP-AggZO in the large-\(K\) regime.
 
