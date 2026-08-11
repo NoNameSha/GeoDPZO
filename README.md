@@ -230,7 +230,7 @@ Claim **C2** evaluates whether GeoDPZO can achieve a better trade-off between mo
 We perform the comparison between GeoDPZO results on SST-5 `K=32` and DP-AggZO on SST-5 `K=64/256`, and compare the GeoDPZO-LC results on MNLI with `K=64` to DP-AggZO with $K=64/256$ under privacy budget `epsilon=6`.
 
 
-### C2-1-A: GeoDPZO-SC on SST-5 with $K=32$
+### C2-1-1: GeoDPZO-SC on SST-5 with $K=32$
 
 Run GeoDPZO-SC by setting `ZO_METHOD=sc`:
 
@@ -245,7 +245,7 @@ bash examples/dpaggzo.sh
 ```
 
 
-### C2-1-B: GeoDPZO-LC on MNLI with $K=64$
+### C2-1-2: GeoDPZO-LC on MNLI with $K=64$
 
 Reproduct GeoDPZO-LC by setting `ZO_METHOD=lc`:
 
@@ -260,7 +260,7 @@ bash examples/dpaggzo.sh
 ```
 
 
-### C2-2-A: DP-AggZO with $K=64$
+### C2-2-1: DP-AggZO with $K=64$
 
 For comparison, run DP-AggZO with `K=64`:
 
@@ -276,7 +276,7 @@ bash examples/dpaggzo.sh
 
 and reuse the result of GeoDPZO-LC on SST-5 with $K-64$ in the experiments C1-B.
 
-### C2-2-B: DP-AggZO with $K=256$
+### C2-2-2: DP-AggZO with $K=256$
 
 To evaluate DP-AggZO with substantially more zeroth-order queries, increase `NUM_DIRECTION` to 256:
 
