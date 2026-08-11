@@ -174,7 +174,7 @@ DPZERO_THRESHOLD=50 TASK="SST-2" \
 bash examples/dpaggzo.sh
 ```
 
-Comparing **C1-A-1**, **C1-A-2**, and **C1-A-3** validates Claim **C1-A**, which examines whether GeoDPZO-SC provides improved utility over DP-AggZO and DPZero in the small-\(K\) regime under the same privacy constraint.
+Comparing **C1-A-1**, **C1-A-2**, and **C1-A-3** validates Claim **C1-A**, which examines whether GeoDPZO-SC provides improved utility over DP-AggZO and DPZero in the small $K$ regime under the same privacy constraint.
 
 
 ---
