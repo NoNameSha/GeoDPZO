@@ -106,9 +106,9 @@ The following experiments are provided to reproduce the main empirical claims of
 For artifact validation, we focus on RoBERTa-large, as experiments with larger OPT models require substantially more computation.
 
 
-## C1-A: GeoDPZO-SC in the Small-$K$ Regime
+## C1-A: GeoDPZO-SC in the Small $K$ Regime
 
-Claim **C1-A** evaluates whether **GeoDPZO-SC can achieve better utility than existing DPZO baselines in the small-$K$ regime under the same privacy constraint**.
+Claim **C1-A** evaluates whether **GeoDPZO-SC can achieve better utility than existing DPZO baselines in the small $K$ regime under the same privacy constraint**.
 
 We compare GeoDPZO-SC against DP-AggZO and DPZero on SST-2 with privacy budget `epsilon=6`.
 
@@ -184,9 +184,9 @@ Comparing **C1-A-1**, **C1-A-2**, and **C1-A-3** validates Claim **C1-A**, which
 
 ---
 
-## C1-B: GeoDPZO-LC in the Large-$K$ Regime
+## C1-B: GeoDPZO-LC in the Large $K$ Regime
 
-Claim **C1-B** evaluates whether **GeoDPZO-LC can achieve better utility than DP-AggZO in the large-$K$ regime under the same privacy constraint**.
+Claim **C1-B** evaluates whether **GeoDPZO-LC can achieve better utility than DP-AggZO in the large $K$ regime under the same privacy constraint**.
 
 We perform the comparison on SST-5 with privacy budget `epsilon=6` and `K=64`.
 
