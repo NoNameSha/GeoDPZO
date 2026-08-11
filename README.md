@@ -3,7 +3,7 @@ GeoDPZO: Symmetry-Aware Differentially Private Zeroth-Order Optimization for Eff
 
 ## Overview
 
-GeoDPZO improves differentially private zeroth-order optimization by exploiting the implicit symmetry of multi-direction gradient estimators. We show that these estimators remain positively aligned with the expected zeroth-order gradient after clipping, which helps explain the stability gains of multi-direction aggregation.
+**GeoDPZO** improves differentially private zeroth-order optimization by exploiting the implicit symmetry of multi-direction gradient estimators. We show that these estimators remain positively aligned with the expected zeroth-order gradient after clipping, which helps explain the stability gains of multi-direction aggregation.
 
 Based on this insight, we develop two symmetry-aware clipping mechanisms, **GeoDPZO-SC** and **GeoDPZO-LC**, for different symmetry regimes. Compared with existing DPZO methods, GeoDPZO improves optimization stability and utility while reducing the need for costly additional perturbation directions.
 
